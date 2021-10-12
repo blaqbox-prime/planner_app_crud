@@ -1,2 +1,22 @@
 @import 'resets';
 @import 'variables';
+@import './components/sidebar';
+@import './components/accountTile';
+
+.App{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    @include mobile-device{
+        display: block;
+        &__main{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+    }
+}

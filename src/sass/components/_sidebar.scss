@@ -1,0 +1,41 @@
+@import '../variables';
+
+.Sidebar{
+    background-color: $bg-grey;
+    padding: 2em;
+    height: 100vh;
+
+    &__title{
+        margin-top: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    &__icon-tile{
+        display: flex;
+        align-items: center;
+        margin-top: 1em;
+    }
+
+    &__icon{
+        margin-right: .5em;
+    }
+
+    hr{
+        background-color: $text-grey;
+        margin: 2rem 0;
+        height: 2px;
+        opacity:.2;
+    }
+
+    @include mobile-device{ // mobile specific styles
+        padding: 2em;
+        z-index: 5;
+        position: absolute;
+        width: 100vw;
+
+    }
+}
+
+.text-green{
+    color: $dark-green;
+}

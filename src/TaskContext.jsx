@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react'
 import {tasks as sampleTasks} from './models/Task'
 
-const taskContext = new React.createContext();
+const TaskContext = new React.createContext();
 
 export function useTask(){
-    return useContext(taskContext);
+    return useContext(TaskContext);
 }
 
 
@@ -32,12 +32,13 @@ function TaskProvider({children}) {
         tasks,
         todaysTasks,
         loadTasks,
+        loadTodaysTasks
     }
 
     return (
-        <TaskContext value={value}>
+        <TaskContext.Provider value={value}>
             {children}
-        </TaskContext>
+        </TaskContext.Provider>
     )
 }
 

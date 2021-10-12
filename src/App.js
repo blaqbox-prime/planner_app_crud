@@ -1,26 +1,15 @@
-import './App.css';
-import './sass/main.scss';
-import {v4 as guid} from 'uuid';
-import User from './models/User.js';
-import {tasks} from './models/Task.js';
-
+import "./App.css";
+import "./sass/main.scss";
+import Sidebar from "./components/Sidebar";
+import Tasks from "./components/Tasks";
 
 function App() {
-
-  const damien = new User(
-    guid(),
-    'Damien',
-    'Lewis',
-    'Standard Account'
-)
-
- console.log(tasks);
-
-  console.log(damien.getFullName())
-
   return (
     <div className="App">
-     <h1>Sass Is Working</h1>
+      <Sidebar />
+      <main className="App__main">
+        <Tasks />
+      </main>
     </div>
   );
 }

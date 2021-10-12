@@ -4,4 +4,18 @@ $bg-blue: #a9ccca;
 $black: #192024;
 $bg-dark: #5c6165; 
 $green: #6e908b;
-$dark-green: #2b4e51;
+$dark-green: #09827D;
+
+@mixin mobile-device(){
+    @media screen and (max-width:1024px){
+        @content
+    }
+}
+
+@function set-text-color($bg-color){
+    @if(lightness($bg-color) > 40){
+        @return $black;
+    } @else {
+        @return #fff;
+    }
+}
