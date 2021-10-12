@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import './sass/main.scss';
+import {v4 as guid} from 'uuid';
+import User from './models/User.js';
+import {tasks} from './models/Task.js';
+
 
 function App() {
+
+  const damien = new User(
+    guid(),
+    'Damien',
+    'Lewis',
+    'Standard Account'
+)
+
+ console.log(tasks);
+
+  console.log(damien.getFullName())
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>Sass Is Working</h1>
     </div>
   );
 }
