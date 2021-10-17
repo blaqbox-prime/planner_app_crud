@@ -1,6 +1,7 @@
 $bg-grey: #f3f4f4;
 $text-grey: #b3bec0;
 $bg-blue: #a9ccca;
+$hover-blue: #a9ccca30;
 $black: #192024;
 $bg-dark: #5c6165; 
 $green: #6e908b;
@@ -18,4 +19,11 @@ $dark-green: #09827D;
     } @else {
         @return #fff;
     }
+}
+
+
+@mixin page-header-spacing{
+        margin-top: 1.5rem;
+        margin-bottom: 3rem;
+        display: flex;
 }
