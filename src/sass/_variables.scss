@@ -6,8 +6,8 @@ $bg-dark: #5c6165;
 $green: #6e908b;
 $dark-green: #09827D;
 
-@mixin mobile-device(){
-    @media screen and (max-width:1024px){
+@mixin mobile-device{
+    @media screen and (max-width:960px){
         @content
     }
 }

@@ -2,6 +2,14 @@
 @import 'variables';
 @import './components/sidebar';
 @import './components/accountTile';
+@import './components/channel';
+
+// modifier class
+.text-green{
+    color: $dark-green;
+}
+
+
 
 .App{
     position: relative;
@@ -11,6 +19,8 @@
     display: flex;
     @include mobile-device{
         display: block;
+        overflow-x: hidden;
+        overflow-y: scroll;
         &__main{
             position: absolute;
             top: 0;
