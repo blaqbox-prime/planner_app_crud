@@ -8,15 +8,28 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 function Channel({title}) {
 
-    const [expanded, setExpanded] = useState(true)
+    const [expanded, setExpanded] = useState(false)
 
    const arrowDownStyle =  {
     transform: 'RotateX(-90deg)'
    }
 
+   const togglePanel = () => {
+       const newState = !expanded;
+        setExpanded(newState);
+
+        const panel = document.querySelector('.Channel__links');
+        if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+        }else{
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+
+   }
+
     return (
         <div className="Channel">
-            <div className="Channel__header">
+            <div className="Channel__header" onClick={() => togglePanel()}>
                 <h2 className="Channel__title">{title || 'My Channel'}</h2>
                 <img src={Arrow} alt="" className={`Channel__expand ${!expanded && 'Channel__expand_closed'}`}/>
             </div>
