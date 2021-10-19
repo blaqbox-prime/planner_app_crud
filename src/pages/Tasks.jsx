@@ -1,5 +1,6 @@
 import React from 'react'
 import TaskList from '../components/TaskList';
+import TaskForm from '../components/TaskForm';
 
 function Tasks() {
     return (
@@ -8,6 +9,7 @@ function Tasks() {
             <h1 className="Tasks__title">Tasks</h1>
             </div>
             <TaskList />
+            <TaskForm/>
             
         </div>
     )
