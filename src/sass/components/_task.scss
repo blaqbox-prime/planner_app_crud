@@ -1,0 +1,85 @@
+.Task{
+    padding: 1.5em;
+    border: 3px solid $bg-grey;
+    margin: 2em 0;
+    border-radius: 12px;
+    display: flex;
+    transition: box-shadow .2s ease-out;
+    cursor: pointer;
+
+    &__status{
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        border: 3px solid $bg-dark;
+        margin-right: 1em;
+        &.progress{
+            border: 5px solid orangered;
+        }
+        &.completed{
+            border: none;
+            border: 7px solid $dark-green;
+        }
+    }
+
+    &__title{
+        margin-top: -2px;
+        font-size: 1.8rem;
+    }
+
+    &__creator-created{
+        margin: 1em 0;
+        font-weight: 500;
+        font-size: 1.05rem;
+    }
+
+    &:focus,&:hover{
+        outline: none;
+        border: 3px solid $bg-blue;
+        box-shadow: 0px 0px 5px 1px $bg-blue;
+    }
+}
+
+.TaskCategory{
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: .7em .8em;
+    border-radius: 8px;
+    font-size: 12px;
+    p{
+        color: $black;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    &.personal{
+        border: 2px solid $black;
+    }
+    &.design{
+        border: 2px solid yellow;
+    }
+    &.functionality{
+        border: 2px solid $bg-dark;
+    }
+
+    .categoryIcon{
+        width: 15px;
+        height: 15px;
+        border: 5px solid $black;
+        margin-right: .5em;
+
+        &.personal{
+            border-radius: 7.5px;
+        }
+        &.design{
+            border: 5px solid yellow;
+        }
+        &.functionality{
+            border: none;
+            background-color: $bg-dark;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);      
+        }
+    }
+
+}

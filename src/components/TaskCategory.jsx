@@ -1,14 +1,20 @@
 import React from 'react'
 
 const buildCategoryIcon = ({category}) => {
-    return (<div className={`categoryIcon ${category === 'design' ? 'design' : 'functionality'}`}></div>);
+        console.log(category);
+
+        if (category === 'personal') { return (<div className={`categoryIcon personal`}></div>);}
+        else if (category == 'design') {return (<div className={`categoryIcon design`}></div>);}
+        else if (category == 'functionality') {return (<div className={`categoryIcon functionality`}></div>);}
+
+    
 }
 
 function TaskCategory({category}) {
     return (
-        <div className="TaskCategory">
-            {category && buildCategoryIcon(category)}
-            <p>{category || 'none'}</p>
+        <div className={`TaskCategory ${category}`}>
+            {category && buildCategoryIcon({category})}
+            <p>{category || ''}</p>
         </div>
     )
 }

@@ -1,21 +1,32 @@
 import React, {useContext, useState} from 'react'
-import {tasks as sampleTasks} from './models/Task'
+import Task,{tasks as sampleTasks} from './models/Task'
+import {v4} from "uuid";
+import {damien, kevin} from './models/User';
 
 const TaskContext = new React.createContext();
 
 export function useTask(){
     return useContext(TaskContext);
 }
-
+// const task_1 = {
+//     id:v4(),
+//     author : damien,
+//     date : new Date('8 Sep, 2021'),
+//     title : 'Push new workflows to github branch',
+//     category: null,
+//    status : 'incomplete'
+// };
 
 function TaskProvider({children}) {
+
+
     
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(sampleTasks);
     const [todaysTasks, setTodaysTasks] = useState([]);
 
     const loadTasks = () => {
-        setTasks(sampleTasks); 
-        console.log('All Tasks: \n' + tasks);
+        // setTasks(task_1); 
+        console.log(tasks);
     }
 
     const loadTodaysTasks = () => {
@@ -27,12 +38,17 @@ function TaskProvider({children}) {
         console.log('todays Tasks: \n' + todaysTasks );
     }
 
+    const addTask = (task) => {
+        setTasks([...tasks,task]);
+    }
+
     // values
     const value = {
         tasks,
         todaysTasks,
         loadTasks,
-        loadTodaysTasks
+        loadTodaysTasks,
+        addTask
     }
 
     return (

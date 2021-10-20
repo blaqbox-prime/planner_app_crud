@@ -1,7 +1,19 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+import {useTask} from '../TaskContext';
+import Task from './Task'
 
 const TaskList = () => {
+
+    const {loadTasks, tasks} = useTask();
+
+    useEffect(() => {
+        console.log(new Date().getDate());
+        loadTasks();
+        // console.log('Loading tasks...')
+    },[])
+    // date={task.getFormattedDate()}
+
     return (
         <div className="TaskList">
             {/* task list Title */}
@@ -18,7 +30,11 @@ const TaskList = () => {
               <h3 className="text-green">Add Task</h3>
             </div>
             {/* List of tasks */}
-        </div>
+            {
+        tasks.map(task => 
+            <Task key={task.id} title={task.title} author={task.author.getFullName()} date={task.getFormattedDate()} status={task.status} category={task.category}/>
+        )
+    }        </div>
     )
 }
 
