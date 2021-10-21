@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import AccountTile from "./AccountTile";
 import TaskCategory from "./TaskCategory";
 import {useTask} from '../TaskContext';
 import Task from '../models/Task';
 import {v4} from "uuid";
 import {damien, kevin} from '../models/User';
+import {gsap} from 'gsap';
+import { Button, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 
-function TaskForm() {
+
+function TaskForm({close}) {
   const [task, setTask] = useState("");
   const {addTask} = useTask();
+  const el = useRef();
+  const q = gsap.utils.selector(el);
+  const tl = useRef();
+
+  useLayoutEffect(()=>{
+    // animations
+    tl.current = gsap.timeline()
+    .from(".TaskForm",{y: -35, opacity: 0, duration: 1})
+    .from(".form-group",{y:-25, opacity: 0, duration: .5, stagger: .3})
+    .from(".TaskForm__btn", {opacity: 0, duration: .25})
+  },[])
 
   const updateTask = (e) => {
     const value = e.target.value;
@@ -42,6 +57,8 @@ function TaskForm() {
 
   return (
     <form className="TaskForm" autoComplete="off">
+      {/* close btn */}
+      <IconButton className="TaskForm__close" onclick={close}><CloseIcon/></IconButton>
       <div className="form-group">
         <label for="title">New Task</label>
         <input
