@@ -1,19 +1,18 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import AccountTile from "./AccountTile";
-import TaskCategory from "./TaskCategory";
 import {useTask} from '../TaskContext';
 import Task from '../models/Task';
 import {v4} from "uuid";
-import {damien, kevin} from '../models/User';
+import { kevin} from '../models/User';
 import {gsap} from 'gsap';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 
 
-function TaskForm({close}) {
+function TaskForm() {
   const [task, setTask] = useState("");
-  const {addTask} = useTask();
+  const {addTask, toggleTaskForm} = useTask();
   const el = useRef();
   const q = gsap.utils.selector(el);
   const tl = useRef();
@@ -50,7 +49,13 @@ function TaskForm({close}) {
     );
 
     // add task to existing tasksTitle
-    addTask(newTask);
+    try{
+      newTask.save();
+      addTask(newTask);
+    }
+    catch(err){
+      console.log(err);
+    }
     
     setTask(''); //reset task field
   }
@@ -58,7 +63,7 @@ function TaskForm({close}) {
   return (
     <form className="TaskForm" autoComplete="off">
       {/* close btn */}
-      <IconButton className="TaskForm__close" onclick={close}><CloseIcon/></IconButton>
+      <IconButton className="TaskForm__close" onClick={() => toggleTaskForm()}><CloseIcon/></IconButton>
       <div className="form-group">
         <label for="title">New Task</label>
         <input

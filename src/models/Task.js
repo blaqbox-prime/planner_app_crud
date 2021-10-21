@@ -23,7 +23,9 @@ class Task{
         return `${this.date_created.getDate()} ${months[this.date_created.getMonth()]}, ${this.date_created.getFullYear()}`
     }
 
-    save(){}
+    save(){
+
+    }
 
     delete(){}
 }

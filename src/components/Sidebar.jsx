@@ -9,9 +9,9 @@ import { Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 
-function Sidebar() {
+function Sidebar({closed}) {
     return (
-        <div className="Sidebar">
+        <div className={`Sidebar ${closed && 'Sidebar__closed'}`}>
            <div className="Sidebar__header">
             <h1 className="Sidebar__title">Plan <span className="text-green">Out</span></h1>
            <IconButton className="Sidebar__closeIcon" id='Sidebar__closeIcon'>
