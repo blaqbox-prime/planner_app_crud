@@ -31,11 +31,11 @@ app.get("/tasks/:id",(req,res)=>{
 
 // create a task
 app.post('/task/create',(req,res)=>{
-    const {id, title, category, status, author, date} = req.body;
+    const {id, title, category, status, author, date, deadline} = req.body;
 
     console.log(req.body);
-    db.query("INSERT INTO tasks (id, title, category, status, author, date) VALUES (?, ?, ?, ?, ?, ?)",
-    [id, title, category, status, author, date], (err,result) => {
+    db.query("INSERT INTO tasks (id, title, category, status, author, date, deadline) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [id, title, category, status, author, date, deadline], (err,result) => {
         if (err) {console.log(err)}
         console.log(result);
         res.send();
@@ -58,8 +58,8 @@ app.post('/task/update-status/:id',(req,res)=>{
 
 // Update Task 
 app.post('/task/update',(req,res)=>{
-    const {id, title, category, date} = req.body;
-    db.query('UPDATE tasks SET title = ?, category = ?, date = ? WHERE id = ?',[title, category, date, id],(err, result)=>{
+    const {id, title, category, deadline,} = req.body;
+    db.query('UPDATE tasks SET title = ?, category = ?, deadline = ? WHERE id = ?',[title, category, deadline, id],(err, result)=>{
         if(err) {console.error(err)}
         console.log(result);
         res.json(result);

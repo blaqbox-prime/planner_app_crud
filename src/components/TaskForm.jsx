@@ -12,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function TaskForm({currentTask}) {
   const [title, setTitle] = useState("");
+  const [deadline, setDeadline] = useState("");
   const {toggleTaskForm, setCurrentTask, loadTasks} = useTask();
   const el = useRef();
   const tl = useRef();
@@ -35,6 +36,11 @@ function TaskForm({currentTask}) {
     setTitle(value);
   };
 
+  const updateDeadline = (e) => {
+    const value = e.target.value;
+    setDeadline(value);
+  };
+
   const createTask = () => {
        // create a task instance
        let newTask = new Task(
@@ -43,7 +49,8 @@ function TaskForm({currentTask}) {
         new Date(),
         title,
         getCategoryFromSelect(),
-        'incomplete'
+        'incomplete',
+        deadline,
       );  
 
     // add task to existing tasks 
@@ -69,7 +76,8 @@ function TaskForm({currentTask}) {
       currentTask.date_created, 
       title,
       getCategoryFromSelect(),
-      currentTask.status
+      currentTask.status,
+      deadline
     );
 
     updatedTask.update();
@@ -128,6 +136,16 @@ function TaskForm({currentTask}) {
         <select className="TaskForm__category form-control" name='categories' id='categories'>
           {_buildCategoryOptions()}
         </select>
+      </div>
+      <div className="form-group">
+        <label for="deadline">Deadline</label>
+        <input
+          type="date"
+          className="form-control"
+          value={deadline}
+          onChange={updateDeadline}
+          required
+        />
       </div>
 
       <div className="form-group">

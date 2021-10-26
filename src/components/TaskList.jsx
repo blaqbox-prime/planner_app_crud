@@ -63,6 +63,17 @@ const TaskList = () => {
 export default TaskList
 
 export const EmptyTaskList = () => {
+
+    let tl = useRef();
+
+    useLayoutEffect(()=>{
+        tl.current = gsap.timeline()
+        .from(".EmptyTaskList", {duration: .3, y: 25, opacity: 0});
+        return () => {
+            tl.current.reverse();
+        }
+    },[])
+
     return (
         <div className="EmptyTaskList">
             <img src="images/todos-empty.png" alt="empty list" />

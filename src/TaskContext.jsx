@@ -31,12 +31,22 @@ function TaskProvider({children}) {
                     new Date(task.date),
                     task.title,
                     task.category,
-                    task.status
+                    task.status,
+                    task.deadline == null ? null : new Date(task.deadline)
                 );
             })
             setTasks(serverTasks);
+            console.log(serverTasks);
+            initialTasksInProgress(serverTasks);
+            
         }).catch((error) => {console.log(error);});
         console.log(tasks);
+    }
+
+    // set Initial Number of Tasks in progress
+    const initialTasksInProgress = (tasks) => {
+        const numTasks = tasks.filter(task => task.status === 'inProgress').length;
+        setTasksInProgress(numTasks);
     }
 
     // filter today's Tasks into memory
