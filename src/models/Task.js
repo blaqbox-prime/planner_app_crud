@@ -9,7 +9,7 @@ class Task{
     category;
     status = 'new';
 
-    constructor(id,author,date_created, title, category, status){
+    constructor(id, author,date_created, title, category, status){
         this.id = id;
         this.author = author;
         this.date_created = date_created;
@@ -23,11 +23,49 @@ class Task{
         return `${this.date_created.getDate()} ${months[this.date_created.getMonth()]}, ${this.date_created.getFullYear()}`
     }
 
-    save(){
-
+    create(){
+        fetch('http://127.0.0.1:3002/task/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id: this.id,
+                author: this.author.id,
+                title: this.title,
+                category: this.category,
+                status: this.status,
+                date: this.date_created,
+            })
+        }).then((res) => console.log(res)).catch(err => console.error(err));
     }
 
-    delete(){}
+    update(){
+        fetch('http://127.0.0.1:3002/task/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id: this.id,
+                title: this.title,
+                category: this.category,
+                date: this.date_created,
+            })
+        }).then((data) => {console.log(data.message)}).catch(err => console.error(err));
+    }
+
+    updateStatus(status){
+        fetch(`http://127.0.0.1:3002/task/update-status/${this.id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                status: status
+            })
+        }).then((data) => {console.log(data.message)}).catch(err => console.error(err));
+    }
+
+    delete(){
+        fetch(`http://127.0.0.1:3002/task/delete/${this.id}`, {
+            method: 'DELETE',
+        }).then((data) => {console.log(data)}).catch(err => console.error(err));
+    }
 }
 
 export default Task;

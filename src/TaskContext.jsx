@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react'
-import Task,{tasks as sampleTasks} from './models/Task'
-
+import Task, {tasks as sampleTasks} from './models/Task'
 
 const TaskContext = new React.createContext();
 
@@ -10,17 +9,33 @@ export function useTask(){
 
 
 function TaskProvider({children}) {
-
-
+    
     
     const [tasks, setTasks] = useState([]);
     const [todaysTasks, setTodaysTasks] = useState([]);
-    const [showForm, setShowForm] = useState(true);
+    const [showForm, setShowForm] = useState(false);
+    const [currentTask, setCurrentTask] = useState()
     const [tasksInProgress, setTasksInProgress] = useState(0);
 
     // Load tasks into memory
     const loadTasks = () => {
-        setTasks(sampleTasks);
+        // fetch from server
+        fetch('http://localhost:3002/tasks', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json'},
+        }).then((response) => {return response.json()}).then(data => {
+            let serverTasks = data.map((task) => {
+                return new Task(
+                    task.id,
+                    sampleTasks[0].author,
+                    new Date(task.date),
+                    task.title,
+                    task.category,
+                    task.status
+                );
+            })
+            setTasks(serverTasks);
+        }).catch((error) => {console.log(error);});
         console.log(tasks);
     }
 
@@ -34,43 +49,25 @@ function TaskProvider({children}) {
         console.log('todays Tasks: \n' + todaysTasks );
     }
 
-    // Create a new Task
-    const addTask = (task) => {
-        setTasks([...tasks,task]);
-    }
-
     // Show and hide New Task Form
     const toggleTaskForm = ()=> {
         let value = showForm;
         setShowForm(!value);
         console.log(showForm)
     }
-    // updateStatus
-    const updateStatus = (id) => {
-        const task = tasks.filter(task => task.id === id);
-        if(task.status === 'incomplete') {
-            task.status = 'inProgress';
-        }
-        if(task.status === 'inProgress') {
-            task.status = 'completed';
-        }
-        if(task.status === 'completed') {
-            task.status = 'incomplete';
-        }
-    console.log(tasks.findIndex(task.id == id));
-    }
-
+   
     // values
     const value = {
         tasks,
         todaysTasks,
         loadTasks,
         loadTodaysTasks,
-        addTask,
         toggleTaskForm,
         showForm,
         tasksInProgress,
-        updateStatus,
+        setTasksInProgress,
+        currentTask, 
+        setCurrentTask
     }
 
     return (

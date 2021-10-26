@@ -7,6 +7,10 @@
     transition: box-shadow .2s ease-out;
     cursor: pointer;
     position: relative;
+    
+    &.completed{
+        color: $text-grey;
+    }
 
     &__status{
         width: 32px;
@@ -27,6 +31,12 @@
     &__title{
         margin-top: -2px;
         font-size: 1.8rem;
+
+        &.completed{
+            font-weight: 400;
+            text-decoration: line-through;
+            color: $text-grey;
+        }
     }
 
     &__creator-created{
@@ -46,6 +56,14 @@
     position: absolute;
     right: 1em;
     bottom: 1em;
+    z-index: 50;
+}
+
+.editIconContainer{
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    z-index: 300;
 }
 
 .TaskCategory{

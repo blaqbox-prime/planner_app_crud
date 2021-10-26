@@ -1,13 +1,13 @@
 import React from 'react'
 import Arrow from '../svg/left-arrow.svg';
 
-function AccountTile({noIcon = false}) {
+function AccountTile({noIcon = false, user}) {
     return (
         <div className="AccountTile">
-            <h2 className="AccountTile__initials">M</h2>
+            <h2 className="AccountTile__initials">{user ? user.firstName[0] :'M'}</h2>
             <div className="AccountTile__detail">
-                <div className="AccountTile__name">Kevin Smithson</div>
-                <p className="AccountTile__accountType">Standard Account</p>
+                <div className="AccountTile__name">{user ? user.getFullName() : 'Kevin Smithson'}</div>
+                <p className="AccountTile__accountType">{user ? user.accountType : 'Standard Account'}</p>
             </div>
             {noIcon === false && <img src={Arrow} alt="left-arrow" />}
         </div>

@@ -10,12 +10,17 @@ import CloseIcon from '@mui/icons-material/Close';
 
 
 
-function TaskForm() {
-  const [task, setTask] = useState("");
-  const {addTask, toggleTaskForm} = useTask();
+function TaskForm({currentTask}) {
+  const [title, setTitle] = useState("");
+  const {toggleTaskForm, setCurrentTask, loadTasks} = useTask();
   const el = useRef();
-  const q = gsap.utils.selector(el);
   const tl = useRef();
+
+  useEffect(()=>{
+    if(currentTask){
+      setTitle(currentTask.title);
+    }
+  },[currentTask])
 
   useLayoutEffect(()=>{
     // animations
@@ -25,71 +30,113 @@ function TaskForm() {
     .from(".TaskForm__btn", {opacity: 0, duration: .25})
   },[])
 
-  const updateTask = (e) => {
+  const updateTitle = (e) => {
     const value = e.target.value;
-    setTask(value);
+    setTitle(value);
   };
 
-  const saveTask = (e) => {
-    // get category value
+  const createTask = () => {
+       // create a task instance
+       let newTask = new Task(
+        v4(),
+        kevin,
+        new Date(),
+        title,
+        getCategoryFromSelect(),
+        'incomplete'
+      );  
 
-    if(task === '') return;
-
-    let select = document.getElementById('categories');
-    let category = select.options[select.selectedIndex].value;
-
-    // create a task instance
-    let newTask = new Task(
-      v4(),
-      kevin,
-      new Date(),
-      task,
-      category,
-      'incomplete'
-    );
-
-    // add task to existing tasksTitle
+    // add task to existing tasks 
     try{
-      newTask.save();
-      addTask(newTask);
+      newTask.create();
     }
     catch(err){
       console.log(err);
     }
-    
-    setTask(''); //reset task field
+     
+  }
+
+  const getCategoryFromSelect = () => {
+       // Get Category value
+       let select = document.getElementById('categories');
+       return select.options[select.selectedIndex].value;
+  }
+
+  const updateTask = () => {
+    let updatedTask = new Task(
+      currentTask.id,
+      currentTask.author, 
+      currentTask.date_created, 
+      title,
+      getCategoryFromSelect(),
+      currentTask.status
+    );
+
+    updatedTask.update();
+  }
+
+  const saveTask = (e) => {
+    if(title === '') return;
+
+    if(currentTask){
+      updateTask();
+
+    }
+    else{
+      createTask()
+    }
+
+    loadTasks();
+    setCurrentTask(null);
+    setTitle(''); //reset task field
+  }
+
+  // Available Task Categories
+  const CATEGORIES = ['none','personal','design','functionality'];
+
+  const _buildCategoryOptions = () => {
+    let selected = 0;
+    currentTask ? selected = CATEGORIES.findIndex(category => category === currentTask.category) : selected = 0; //if currentCategory is passed in, set selected to task category
+    return(
+      CATEGORIES.map((category,idx) => {
+        if(idx === selected){
+         return <option key={idx} value={category} selected >{`${category[0].toUpperCase()}${category.slice(1)}`}</option>
+        }else{
+        return  <option key={idx} value={category}>{`${category[0].toUpperCase()}${category.slice(1)}`}</option>
+        }
+      })
+      )
   }
 
   return (
     <form className="TaskForm" autoComplete="off">
       {/* close btn */}
-      <IconButton className="TaskForm__close" onClick={() => toggleTaskForm()}><CloseIcon/></IconButton>
+      <IconButton className="TaskForm__close" onClick={() => {toggleTaskForm(); setCurrentTask(null);}}><CloseIcon/></IconButton>
       <div className="form-group">
-        <label for="title">New Task</label>
+        <label for="title">{currentTask ? 'Edit Task' : `New Task`}</label>
         <input
           type="text"
           className="form-control"
           placeholder="What task needs to be done?"
-          value={task}
-          onChange={updateTask}
+          value={title}
+          onChange={updateTitle}
           required
         />
       </div>
       <div className="form-group">
         <label for="category">Category</label>
         <select className="TaskForm__category form-control" name='categories' id='categories'>
-          <option value="design">Design</option>
-          <option value="functionality">Functionality</option>
+          {_buildCategoryOptions()}
         </select>
       </div>
 
       <div className="form-group">
         <label for="creator">Creator</label>
         <div className="TaskForm__creator">
-          <AccountTile noIcon={true} />
+          <AccountTile noIcon={true} user={currentTask && currentTask.author}/>
         </div>
       </div>
-      <button className="btn TaskForm__btn form-control" onClick={saveTask}>Create Task</button>
+      <button className="btn TaskForm__btn form-control" onClick={saveTask}>{currentTask ? 'Update Task' : 'Create Task'}</button>
     </form>
   );
 }

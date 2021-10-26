@@ -9,23 +9,33 @@ import { useRef } from 'react';
 
 const TaskList = () => {
 
-    const {loadTasks, tasks, showForm, toggleTaskForm} = useTask();
+    const {loadTasks, tasks, showForm, toggleTaskForm, currentTask, setCurrentTask,tasksInProgress} = useTask();
     const tl = useRef()
 
+    // Run once on mount
+    useEffect(()=>{
+        loadTasks();
+    },[])
+    
+    // re-render on tasks update
+    useEffect(()=>{},[tasks]);
+
+
+    useLayoutEffect(()=>{
+        tl.current = gsap.timeline()
+        .from(".Task", {duration: .3, y: -25, opacity: 0, stagger: .5})
+    },[tasks])
+
+    // for proper Form animation
     useLayoutEffect(() => {
 
     },[showForm])
     
-    useLayoutEffect(()=>{
-        loadTasks();
-        tl.current = gsap.timeline()
-        .from(".Task", {duration: .6, y: -25, opacity: 0, stagger: .5})
-    },[])
 
 
     return (
         <div className="TaskList">
-            {showForm && <TaskForm/>}
+            {showForm && <TaskForm currentTask={currentTask}/>}
             {/* task list Title */}
             <h2 className="TaskList__title">Task List</h2>
             
@@ -33,18 +43,20 @@ const TaskList = () => {
             <div className="TaskList__inProgress">
             <DonutLargeIcon sx={{color: '#5c6165'}}/>
             <p>In Progress</p>
-            <h3 className="TaskList__inProgressCount">3</h3>
+            <h3 className="TaskList__inProgressCount">{tasksInProgress}</h3>
             </div>
             {/* Add Task Button */}
-            <div className="TaskList__addTask" onClick={() => toggleTaskForm()} >
+            <div className="TaskList__addTask" onClick={() => { setCurrentTask(null); toggleTaskForm();}} >
               <h3 className="text-green">Add Task</h3>
             </div>
             {/* List of tasks */}
             {
-        tasks.map(task => 
-            <Task key={task.id} id={task.id} title={task.title} author={task.author.getFullName()} date={task.getFormattedDate()} status={task.status} category={task.category}/>
+        tasks && tasks.map(task => 
+            <Task key={task.id} id={task.id} title={task.title} author={task.author.getFullName()} date={task.getFormattedDate()} status={task.status} category={task.category} />
         )
-    }        </div>
+        }
+        { (tasks === undefined || tasks.length === 0 || !tasks) && <EmptyTaskList />}
+    </div>
     )
 }
 
@@ -53,7 +65,8 @@ export default TaskList
 export const EmptyTaskList = () => {
     return (
         <div className="EmptyTaskList">
-            <img src="" alt="empty list" />
+            <img src="images/todos-empty.png" alt="empty list" />
+            <h1>Looks like you have nothing to do...</h1>
         </div>
     )
 }
