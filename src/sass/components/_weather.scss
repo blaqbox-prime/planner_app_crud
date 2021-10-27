@@ -1,0 +1,59 @@
+.Weather{
+    background-color:#fff;
+    z-index: 9999;
+    top: 0;
+    right: 1.25em;
+    width: 400px;
+    box-shadow: 0px 0px 7px 5px $bg-blue;
+    padding: 2em;
+    margin: 1.5em 0;
+    font-weight: 500;
+
+    &__header{
+        display: flex;
+        justify-content:space-between;
+        margin-bottom: 1em;
+
+        & > div{
+            border: 1px solid $text-grey;
+            padding: 0.3em 0.6em;
+        }
+    }
+
+    &__forecast{
+        margin: {top: 2em; bottom: 4em;};
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    &__conditionImg{
+        width: 200px;
+        margin-bottom: 1em;
+    }
+
+    &__detailsContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__icon{
+        width: 25px;
+        height: 25px;
+        margin-right: .8em;
+    }
+
+    &__details > li{
+        display: flex;
+        margin: 1em 0;
+        p{
+            color: $black;
+        }
+    }
+
+    &__temp{
+        align-self: flex-end;
+        font-size: 5rem;
+        font-weight: 300;
+    }
+}
