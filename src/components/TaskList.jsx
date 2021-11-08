@@ -6,6 +6,7 @@ import TaskForm from './TaskForm';
 import {gsap} from 'gsap';
 import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
+import AddButton from './AddButton';
 
 const TaskList = () => {
 
@@ -46,9 +47,7 @@ const TaskList = () => {
             <h3 className="TaskList__inProgressCount">{tasksInProgress}</h3>
             </div>
             {/* Add Task Button */}
-            <div className="TaskList__addTask" onClick={() => { setCurrentTask(null); toggleTaskForm();}} >
-              <h3 className="text-green">Add Task</h3>
-            </div>
+            <AddButton type="task"/>
             {/* List of tasks */}
             {
         tasks && tasks.map(task => 

@@ -5,6 +5,7 @@
 @import './components/channel';
 @import './components/taskList';
 @import './components/task';
+@import './components/appointment';
 @import './components/weather';
 
 // modifier class
@@ -23,6 +24,17 @@
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.rounded-container{
+    padding: 1.5em;
+    border: 3px solid $bg-grey;
+    margin: 2em 0;
+    border-radius: 12px;
+    display: flex;
+    transition: box-shadow .2s ease-out;
+    cursor: pointer;
+    position: relative;
 }
 
 

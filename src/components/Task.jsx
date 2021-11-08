@@ -52,7 +52,7 @@ function Task({id,title, author, date, category, status}) {
     }
 
     return (
-        <div className={`Task`}>
+        <div className={`Task rounded-container`}>
             {/* Status indicater circle on the left */}
             <div className={`Task__status ${currentStatus === 'inProgress' && 'progress'} ${currentStatus === 'completed' && 'completed'}` } onClick={updateStatusColor}></div>
             {/* content */}

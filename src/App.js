@@ -3,6 +3,7 @@ import "./sass/main.scss";
 import Sidebar from "./components/Sidebar";
 import Tasks from "./pages/Tasks";
 import Dashboard from "./pages/Dashboard";
+import Appointments from "./pages/Appointments";
 import {Switch, Route,Redirect} from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Route exact path="/"><Redirect to="/dashboard"/></Route> 
             <Route path="/dashboard"><Dashboard/></Route>
             <Route path="/tasks"><Tasks /></Route>
+            <Route path="/appointments"><Appointments /></Route>
         </Switch>
       </main>
     </div>

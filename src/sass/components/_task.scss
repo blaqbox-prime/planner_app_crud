@@ -1,12 +1,5 @@
 .Task{
-    padding: 1.5em;
-    border: 3px solid $bg-grey;
-    margin: 2em 0;
-    border-radius: 12px;
-    display: flex;
-    transition: box-shadow .2s ease-out;
-    cursor: pointer;
-    position: relative;
+    @extend .rounded-container;
     
     &.completed{
         color: $text-grey;
