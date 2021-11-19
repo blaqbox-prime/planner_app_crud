@@ -1,6 +1,7 @@
 import React from 'react'
 import Weather from './../components/Weather';
 
+
 function Dashboard() {
 
     const _buildGreetingMessage = () => {

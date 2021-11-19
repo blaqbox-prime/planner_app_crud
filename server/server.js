@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
+const IOPORT = process.env.IOPORT || 3005;
 app.use(cors());
 app.use(express.json());
 
@@ -76,6 +77,61 @@ app.delete('/task/delete/:id', (req,res)=>{
     })
 })
 
+// =======================================================================================
+// get all appointments
+app.get('/appointments',(req,res)=>{
+    db.query('SELECT * FROM appointments',(err,result)=>{
+        if(err){console.log(err)}
+        console.log(result)
+        const rows = result;
+        res.json(result);
+    })
+})
+
+// get one task
+app.get("/appointments/:id",(req,res)=>{
+    const id = req.params.id;
+
+    db.query("SELECT * FROM appointments WHERE id = ?", id, (err, result) => {
+        if(err) {console.log(err)}
+        res.send({result})
+    })
+})
+
+// create a appointment
+app.post('/appointment/create',(req,res)=>{
+    const {id, title, author, date} = req.body;
+
+    console.log(req.body);
+    db.query("INSERT INTO appointments (id, title, author, date) VALUES (?, ?, ?, ?)",
+    [id, title, author, date], (err,result) => {
+        if (err) {console.log(err)}
+        console.log(result);
+        res.send();
+    })
+})
+
+
+// Update appointment 
+app.post('/appointment/update',(req,res)=>{
+    const {id, title, date} = req.body;
+    db.query('UPDATE appointments SET title = ?, date = ? WHERE id = ?',[title, date, id],(err, result)=>{
+        if(err) {console.error(err)}
+        console.log(result);
+        res.json(result);
+    })
+})
+
+// Delete appointment
+app.delete('/appointment/delete/:id', (req,res)=>{
+    const id = req.params.id;
+    db.query('DELETE FROM appointments WHERE id = ?',id, (err, result)=>{
+        if (err) {console.log(err)}
+        console.log({message: `appointment with id: ${id} was deleted successfuly`});
+        res.send({message: `appointment with id: ${id} was deleted successfuly`}); 
+    })
+})
+
 // ======================================================================================== END OF TASK API
 
 // Run Server on Port
@@ -83,3 +139,17 @@ app.listen(PORT, ()=>{
     console.log('listening on port ' + PORT);
 })
 
+
+// Socket IO for IM
+const io = require("socket.io")(IOPORT, {
+    cors: {
+        origin: "*",
+        methods: ["GET","POST"]
+    }
+});
+
+io.on("connection", (socket) => {
+    console.log("User connected to server");
+
+    
+})

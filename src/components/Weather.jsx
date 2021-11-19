@@ -33,11 +33,21 @@ function Weather() {
   const getWeatherReport = () => {
 
     const weatherReport = localStorage.getItem("weather_report");
-    
+    const needsUpdate = () => {
+      const currentTime = new Date();
+      const lastUpdate = new Date(JSON.parse(localStorage.getItem("last_upate")));
+
+      if (currentTime.getTime() - lastUpdate.getTime() > 10800000){
+        return true;
+      } else {
+        return false;
+      }
+
+    }
   
-    if(weatherReport !== null){console.log(JSON.parse(weatherReport)); return setWeather(JSON.parse(weatherReport))} 
+    if(weatherReport !== null && !needsUpdate()){console.log(JSON.parse(weatherReport)); return setWeather(JSON.parse(weatherReport))} 
     else {
-        console.log('Didnt find local report. Now fetching from api')
+        console.log('report needs update. Now fetching from api')
         fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${usersCity}&appid=${WEATHER_API_KEY}`
           )
@@ -48,6 +58,7 @@ function Weather() {
               console.log(data);
               setWeather(data);  
               localStorage.setItem('weather_report', JSON.stringify(data));
+              localStorage.setItem('last_update',JSON.stringify(new Date()));
           })
             .catch((error) => {
               console.log(error);
