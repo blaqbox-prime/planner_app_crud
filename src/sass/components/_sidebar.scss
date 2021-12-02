@@ -8,9 +8,7 @@
     max-width: 400px;
 
     &__header{
-        margin-top: 1.5rem;
-        margin-bottom: 3rem;
-        display: flex;
+        @include page-header-spacing;
         justify-content:space-between;
     }
 

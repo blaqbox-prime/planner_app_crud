@@ -3,10 +3,22 @@
 @import './components/sidebar';
 @import './components/accountTile';
 @import './components/channel';
-
+@import './components/taskList';
 // modifier class
 .text-green{
     color: $dark-green;
+}
+
+.page_header{
+    @include page-header-spacing;
+}
+
+.main-container{
+    flex: 1;
+    padding: 2em;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 
@@ -17,6 +29,13 @@
     height: 100vh;
     overflow: hidden;
     display: flex;
+
+    &__main{
+        flex: 1;
+    }
+
+
+
     @include mobile-device{
         display: block;
         overflow-x: hidden;

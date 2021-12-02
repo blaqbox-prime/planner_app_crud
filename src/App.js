@@ -1,7 +1,7 @@
 import "./App.css";
 import "./sass/main.scss";
 import Sidebar from "./components/Sidebar";
-import Tasks from "./components/Tasks";
+import Tasks from "./pages/Tasks";
 
 function App() {
   return (
