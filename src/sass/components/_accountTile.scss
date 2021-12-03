@@ -1,0 +1,43 @@
+
+.AccountTile{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 2em;
+
+    &__initials{
+        background-color: $black;
+        color: set-text-color($bg-dark);
+        padding: .65em .75em;
+        font-size: 1.25rem;
+        text-align: center;
+        justify-content: center;
+        border-radius: 5px;
+    }
+
+    &__detail{
+        margin-left: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        flex: 1;
+    }
+
+    &__name{
+        font-weight: 600;
+        font-size: 1.12em;
+        margin-bottom: 3px;
+    }
+
+    &__accountType{
+        font-size: .85rem;
+    }
+
+    img{
+        margin-top: 6px;
+        align-self: flex-start;
+        width: .5rem;
+    }
+}

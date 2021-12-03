@@ -1,26 +1,23 @@
-import './App.css';
-import './sass/main.scss';
-import {v4 as guid} from 'uuid';
-import User from './models/User.js';
-import {tasks} from './models/Task.js';
-
+import "./App.css";
+import "./sass/main.scss";
+import Sidebar from "./components/Sidebar";
+import Tasks from "./pages/Tasks";
+import Dashboard from "./pages/Dashboard";
+import Appointments from "./pages/Appointments";
+import {Switch, Route,Redirect} from 'react-router-dom';
 
 function App() {
-
-  const damien = new User(
-    guid(),
-    'Damien',
-    'Lewis',
-    'Standard Account'
-)
-
- console.log(tasks);
-
-  console.log(damien.getFullName())
-
   return (
     <div className="App">
-     <h1>Sass Is Working</h1>
+      <Sidebar />
+      <main className="App__main">
+        <Switch>
+            <Route exact path="/"><Redirect to="/dashboard"/></Route> 
+            <Route path="/dashboard"><Dashboard/></Route>
+            <Route path="/tasks"><Tasks /></Route>
+            <Route path="/appointments"><Appointments /></Route>
+        </Switch>
+      </main>
     </div>
   );
 }

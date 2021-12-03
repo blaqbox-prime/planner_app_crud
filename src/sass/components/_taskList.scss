@@ -1,0 +1,115 @@
+.TaskList{
+
+    max-width: 100%;
+
+    &__title{
+        margin-bottom: .8em;
+    }
+
+    &__inProgress{
+        display: flex;
+        align-items: center;
+        margin-bottom: .5em;
+        p{
+            margin: 0 .5em;
+            color: $black;
+            font-weight: 500;
+        }
+    }
+    &__inProgressCount{
+        background-color: $black;
+        color: set-text-color($bg-dark);
+        padding: .5em .6em;
+        font-size: .6rem;
+        text-align: center;
+        justify-content: center;
+        border-radius: 5px;
+    }
+
+    &__addTask{
+        font-size: 14px;
+        display: flex;
+        border: 2px solid $bg-blue;
+        padding: .8em 1em;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color .3s ease-in-out;
+        &:hover{
+            background-color: $dark-green;
+            border-color: transparent;
+           h3{
+               color: #fff;
+               transition: color .3s ease-in-out
+           }
+        }
+    }
+}
+
+.TaskForm{
+    // display: none;
+    position: absolute;
+    background-color:#fff;
+    z-index: 9999;
+    top: 0;
+    right: 1.25em;
+    width: 400px;
+    box-shadow: 0px 0px 5px 3px $bg-blue;
+    padding: 2em;
+    margin: 1.5em 0;
+    font-weight: 500;
+
+    &.closed{
+        pointer-events: none;
+    }
+    &__close{
+        position: relative;
+        top: 0;
+        right: 0;
+    }
+
+    .form-group{
+        width: 100%;
+        margin-bottom: 1.5em;
+        label{
+            font-weight: 600;
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+    }
+
+    .form-control{
+        font-weight: 500;
+        font-size: 14px;
+        display: block;
+        width: 100%;
+        border: 2px solid $bg-blue;
+        padding: .8em 1em;
+        border-radius: 8px;
+        transition: box-shadow .2s ease-out;
+        
+        
+        &:focus,&:hover{
+            outline: none;
+            border: 2px solid $bg-blue;
+            box-shadow: 0px 0px 5px 3px $bg-blue;
+        }
+    }
+
+    &__btn{
+        cursor: pointer;
+        background-color: $dark-green;
+        color: #fff;
+    }
+}
+
+.EmptyTaskList{
+    margin: 1em auto;
+    text-align: center;
+}
+
+.EmptyTaskList > img{
+    width: 500px;
+}
+
+// Task Category

@@ -1,23 +1,55 @@
 import React, {useContext, useState} from 'react'
-import {tasks as sampleTasks} from './models/Task'
+import Task, {tasks as sampleTasks} from './models/Task'
 
-const taskContext = new React.createContext();
+const TaskContext = new React.createContext();
 
 export function useTask(){
-    return useContext(taskContext);
+    return useContext(TaskContext);
 }
 
 
 function TaskProvider({children}) {
     
+    
     const [tasks, setTasks] = useState([]);
     const [todaysTasks, setTodaysTasks] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [currentTask, setCurrentTask] = useState()
+    const [tasksInProgress, setTasksInProgress] = useState(0);
 
+    // Load tasks into memory
     const loadTasks = () => {
-        setTasks(sampleTasks); 
-        console.log('All Tasks: \n' + tasks);
+        // fetch from server
+        fetch('http://localhost:3002/tasks', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json'},
+        }).then((response) => {return response.json()}).then(data => {
+            let serverTasks = data.map((task) => {
+                return new Task(
+                    task.id,
+                    sampleTasks[0].author,
+                    new Date(task.date),
+                    task.title,
+                    task.category,
+                    task.status,
+                    task.deadline == null ? null : new Date(task.deadline)
+                );
+            })
+            setTasks(serverTasks);
+            console.log(serverTasks);
+            initialTasksInProgress(serverTasks);
+            
+        }).catch((error) => {console.log(error);});
+        console.log(tasks);
     }
 
+    // set Initial Number of Tasks in progress
+    const initialTasksInProgress = (tasks) => {
+        const numTasks = tasks.filter(task => task.status === 'inProgress').length;
+        setTasksInProgress(numTasks);
+    }
+
+    // filter today's Tasks into memory
     const loadTodaysTasks = () => {
         if (tasks.length === 0) {
             loadTasks();
@@ -27,17 +59,31 @@ function TaskProvider({children}) {
         console.log('todays Tasks: \n' + todaysTasks );
     }
 
+    // Show and hide New Task Form
+    const toggleTaskForm = ()=> {
+        let value = showForm;
+        setShowForm(!value);
+        console.log(showForm)
+    }
+   
     // values
     const value = {
         tasks,
         todaysTasks,
         loadTasks,
+        loadTodaysTasks,
+        toggleTaskForm,
+        showForm,
+        tasksInProgress,
+        setTasksInProgress,
+        currentTask, 
+        setCurrentTask
     }
 
     return (
-        <TaskContext value={value}>
+        <TaskContext.Provider value={value}>
             {children}
-        </TaskContext>
+        </TaskContext.Provider>
     )
 }
 

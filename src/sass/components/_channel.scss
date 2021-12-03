@@ -1,0 +1,60 @@
+.Channel{
+    width: 100%;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5em;
+        cursor: pointer;
+    }
+
+    &__expand{
+        transform: rotate(-90deg);
+        width: .5em;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+
+        &_closed{
+            transform: unset;
+        }
+    }
+
+    &__links{
+        margin-left: .8em;
+        width: 100%;
+        transition: max-height 0.5s ease-out;
+        overflow: hidden;
+        max-height: 0;
+    }
+
+    
+    a{
+
+        display: flex;
+        color: $text-grey;
+        width: 100%;
+        padding: .9em .7em;
+        border-radius: .5em; 
+        transition: background-color .3s ease-in-out;
+        margin-bottom: .5em;
+        &.active{
+            color: $dark-green;
+            background-color: $bg-blue;
+        }
+
+        &:hover{
+            color: $dark-green;
+            background-color: $hover-blue;
+        }
+    }
+
+
+
+
+    .no-highlight, .no-highlight:hover{
+        color: initial;
+        background-color: initial;
+    }
+
+   
+}
