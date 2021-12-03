@@ -37,7 +37,7 @@ function Messages() {
             <AddButton type="message"/>
             {showForm && <MessageForm />}
             {messages && messages.map(function(message) {
-                return <Message message={message}  date={new Date().toLocaleTimeString()}/>
+                return <Message message={message.message}  date={message.date.toLocaleString()}/>
             })}
         </div>
     )

@@ -19,13 +19,13 @@ function Weather() {
   const setWeatherSymbol = (condition) => {
 
     switch (condition) {
-      case 'Thunderstorm': return "images/weather/storm.svg";
-      case 'Rain': return "images/weather/heavy-rain.svg";
-      case 'Drizzle': return "images/weather/light-rain.svg"
-      case 'Snow' : return "images/weather/snow.svg";
-      case 'Clouds': return "images/weather/partly-cloudy-day.svg";
-      case 'Clear' : return "images/weather/sun.svg";
-      default: return "images/weather/sun.svg";
+      case 'Thunderstorm': return "/images/weather/storm.svg";
+      case 'Rain': return "/images/weather/heavy-rain.svg";
+      case 'Drizzle': return "/images/weather/light-rain.svg"
+      case 'Snow' : return "/images/weather/snow.svg";
+      case 'Clouds': return "/images/weather/partly-cloudy-day.svg";
+      case 'Clear' : return "/images/weather/sun.svg";
+      default: return "/images/weather/sun.svg";
     }
     
   }
@@ -94,9 +94,9 @@ function Weather() {
       <div className="Weather__detailsContainer">
         <div className="">
           <ul className="Weather__details">
-            <li><img src="images/weather/windy.svg" alt="" className="Weather__icon" /><p className="Weather__windSpeed">8km/h</p></li>
-            <li><img src="images/weather/light-rain.svg" alt="" className="Weather__icon" /><p className="Weather__rainChance">8%</p></li>
-            <li><img src="images/weather/sun.svg" alt="" className="Weather__icon" /><p className="Weather__sunHours">8h</p></li>
+            <li><img src="/images/weather/windy.svg" alt="" className="Weather__icon" /><p className="Weather__windSpeed">8km/h</p></li>
+            <li><img src="/images/weather/light-rain.svg" alt="" className="Weather__icon" /><p className="Weather__rainChance">8%</p></li>
+            <li><img src="/images/weather/sun.svg" alt="" className="Weather__icon" /><p className="Weather__sunHours">8h</p></li>
           </ul>
         </div>
         <h1 className="Weather__temp">{weather != null ? kelvinToCelcius(weather.main.temp) : 0}&deg;</h1>

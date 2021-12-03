@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
-
+import {damien, victor, richard, kevin} from '../models/User';
 import {gsap} from 'gsap';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useMessage } from './../zustand/store';
+import AccountTile from './AccountTile';
+import Message from '../models/Message';
+import { v4 } from "uuid";
+
 
 
 
@@ -36,11 +40,39 @@ function MessageForm() {
    e.preventDefault();
 
    if(message === '' ) return
-    addMessage(message);
-    setTimeout(() => {console.log(messages);}, 1000);
+   setTimeout(() => {console.log(messages);}, 1000);
+   try{
+     const newMessage = new Message(
+       v4(),
+       message,
+       kevin,
+       getRecipientFromSelect(),
+       new Date(),
+       );
+       
+       newMessage.send();
+       addMessage(newMessage);
+    }
+    catch(err){ console.log(err); }
 
     // clear message
     setMessage('');
+  }
+
+  const getRecipientFromSelect = () => {
+    // Get Recipient value
+    let select = document.getElementById('recipients');
+    return select.options[select.selectedIndex].value;
+}
+
+  const accounts = [damien, victor, richard];
+
+  function _buildRecipientList(){
+    return (accounts.map((acc,idx) => {
+      if(idx == 0) return <option value={acc.id} selected> {acc.getFullName()} </option>
+      else
+      return <option value={acc.id}> {acc.getFullName()} </option>
+    }));
   }
 
 
@@ -61,12 +93,12 @@ function MessageForm() {
       </div>
       
     {/* =================================== Select Recipient (Temporarily send to group)*/}
-      {/* <div className="form-group">
-        <label for="creator">Creator</label>
-        <div className="TaskForm__creator">
-          <AccountTile noIcon={true} user={currentTask && currentTask.author}/>
-        </div>
-      </div> */}
+      <div className="form-group">
+        <label for="creator">Recipient</label>
+        <select name="recipients" id="recipients" className="form-control">
+          {_buildRecipientList()}
+        </select>
+      </div>
 
       <button className="btn TaskForm__btn form-control" onClick={sendMessage}>Send Message</button>
     </form>

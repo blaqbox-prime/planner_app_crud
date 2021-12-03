@@ -1,5 +1,6 @@
 import create from 'zustand';
 
+// Messages state =================================================================================================
 export const useMessage = create(
     (set) => ({
         messages: [],
@@ -10,3 +11,12 @@ export const useMessage = create(
     })
 );
 
+// Auth state=====================================================================================================
+
+export const useAuth = create(
+    set => ({ 
+        loggedUser: null,
+        loginUser: (user) => set(state => ({ loggedUser: user})),
+        logoutUser: () => set(state => ({ loggedUser: null})),
+    })
+)

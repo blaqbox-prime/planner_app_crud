@@ -1,6 +1,9 @@
 const express = require('express');
 const db = require('./db');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -8,6 +11,11 @@ const IOPORT = process.env.IOPORT || 3005;
 app.use(cors());
 app.use(express.json());
 
+// Auth routes
+const authRoute = require('./routes/auth');
+
+// auth middleware
+app.use('/auth', authRoute);
 
 
 // get all tasks
@@ -132,6 +140,39 @@ app.delete('/appointment/delete/:id', (req,res)=>{
     })
 })
 
+// ===========================================================  Messages
+
+app.get('/messages', async (req, res) => {
+    db.query('SELECT * FROM messages',(err,res) => {
+        if (err) {
+           console.log(err);
+           res.json(err);
+        }
+        console.log(res);
+        res.json(res);
+    });
+})
+
+// create message 
+app.post('/message/create', async (req, res) => {
+    const {uid, message, sender, recipient, date} = req.body;
+    db.query("INSERT INTO messages (uid, message, sender, recipient, date) VALUES (?,?,?,?,?)", [uid, message, sender, recipient, date], (err, result) => {
+        if(err){console.log(err);return}
+        console.log(result);
+        res.json(result);
+    })
+})
+
+// Delete message
+app.delete('/message/delete/:id', (req,res)=>{
+    const id = req.params.id;
+    db.query('DELETE FROM messages WHERE id = ?',id, (err, result)=>{
+        if (err) {console.log(err)}
+        console.log({message: `message with id: ${id} was deleted successfuly`});
+        res.send({message: `message with id: ${id} was deleted successfuly`}); 
+    })
+})
+
 // ======================================================================================== END OF TASK API
 
 // Run Server on Port
@@ -140,7 +181,7 @@ app.listen(PORT, ()=>{
 })
 
 
-// Socket IO for IM
+// Socket IO for IM =================================================================
 const io = require("socket.io")(IOPORT, {
     cors: {
         origin: "*",
@@ -153,3 +194,7 @@ io.on("connection", (socket) => {
 
     
 })
+
+
+// ====================================================================================
+
