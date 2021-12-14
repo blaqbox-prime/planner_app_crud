@@ -1,0 +1,84 @@
+.form-group{
+    width: 100%;
+    margin-bottom: 1.5em;
+    label{
+        font-weight: 600;
+        display: block;
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+}
+
+.form-control{
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    border: 2px solid $bg-blue;
+    padding: .8em 1em;
+    border-radius: 8px;
+    transition: box-shadow .2s ease-out;
+    
+    
+    &:focus,&:hover{
+        outline: none;
+        border: 2px solid $bg-blue;
+        box-shadow: 0px 0px 5px 3px $bg-blue;
+    }
+}
+
+form{
+    width: 100%;
+    max-width: 400px;
+    input[type="text"],
+    input[type="email"],
+    input[type="password"]{
+        background-color: transparent;
+    }
+
+    .form-btn{
+        cursor: pointer;
+        background-color: $dark-green;
+        color: #fff;
+    }
+    .secondary-link{
+        margin: 1rem 0;
+        display: block;
+        text-align: center;
+    }
+
+    .form-label, label{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+
+.alert-error{
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+    background-color: #ff5555;
+    color: #fff;
+    padding: .8em 1em;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    animation: showAlert .5s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+}
+
+.alert-close{
+    cursor: pointer;
+}
+
+@keyframes showAlert {
+    0%{
+      opacity: 0;
+      transform: translateY(10px);  
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);  
+      }
+}

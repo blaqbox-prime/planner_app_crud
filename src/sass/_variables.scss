@@ -7,6 +7,12 @@ $bg-dark: #5c6165;
 $green: #6e908b;
 $dark-green: #09827D;
 
+
+@mixin bg-green{
+    color: #000;
+    background-color: $green;
+}
+
 @mixin mobile-device{
     @media screen and (max-width:960px){
         @content
@@ -21,9 +27,12 @@ $dark-green: #09827D;
     }
 }
 
+.bg-greeen{
+    @include bg-green;
+}
 
 @mixin page-header-spacing{
-        margin-top: 1.5rem;
-        margin-bottom: 3rem;
-        display: flex;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    display: flex;
 }
