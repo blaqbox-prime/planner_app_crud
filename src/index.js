@@ -7,12 +7,12 @@ import AppointmentProvider from "./AppointmentContext";
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <AppointmentProvider>
+<AppointmentProvider>
   <TaskProvider>
     <Router>
       <App />
     </Router>
   </TaskProvider>,
-  </AppointmentProvider>,
+</AppointmentProvider>,
   document.getElementById("root")
 );

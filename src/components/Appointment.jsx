@@ -2,11 +2,11 @@ import React from 'react';
 import {useAppointment} from '../AppointmentContext'
 import { IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { EditIcon } from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 
-function Appointment({id,title, author, date, category}) {
+function Appointment({id,title, author, date}) {
 
-    const [setCurrentAppointment,toggleAppointmentForm,loadAppointments, appointments, showForm] = useAppointment();
+    const {setCurrentAppointment,toggleAppointmentForm,loadAppointments, appointments, showForm} = useAppointment();
 
     const editAppointment = () => {
         const appointment = appointments.find(t => t.id === id);
@@ -25,7 +25,7 @@ function Appointment({id,title, author, date, category}) {
     }
     
     return (
-        <div className="Appointment">
+        <div className="rounded-container Task">
              {/* content */}
              <div className="Task__content">
                 <h3 className={`Task__title`}>{title || 'untitled'}</h3>

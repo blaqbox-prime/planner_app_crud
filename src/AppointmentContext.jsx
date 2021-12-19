@@ -19,24 +19,22 @@ function AppointmentProvider({children}) {
     // Load tasks into memory
     const loadAppointments = () => {
         // fetch from server
-        // fetch('https://planout-server.herokuapp.com/appointments', {
-        //     method: 'GET',
-        //     headers: { 'Content-Type': 'application/json'},
-        // }).then((response) => {return response.json()}).then(data => {
-        //     let serverAppointments = data.map((ap) => {
-        //         return new Appointment(
-        //             ap.id,
-        //             sampleAppointments[0].author,
-        //             ap.title,
-        //             new Date(ap.date),
-        //         );
-        //     })
-        //     setAppointments(serverAppointments);
-        //     console.log(serverAppointments);
+        fetch('http://localhost:3002/appointments', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json'},
+        }).then((response) => {return response.json()}).then(data => {
+            let serverAppointments = data.map((ap) => {
+                return new Appointment(
+                    ap.id,
+                    sampleAppointments[0].author,
+                    ap.title,
+                    new Date(ap.date),
+                );
+            })
+            setAppointments(serverAppointments);
+            console.log(serverAppointments);
             
-        // }).catch((error) => {console.log(error);});
-        setAppointments(sampleAppointments);
-        console.log(sampleAppointments);
+        }).catch((error) => {console.log(error);});
     }
 
     // filter today's Tasks into memory
@@ -49,7 +47,7 @@ function AppointmentProvider({children}) {
         console.log('todays Appointments: \n' + todaysAppointments );
     }
 
-    // Show and hide New Task Form
+    // Show and hide New Appointment Form
     const toggleAppointmentForm = ()=> {
         let value = showForm;
         setShowForm(!value);

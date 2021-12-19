@@ -7,6 +7,9 @@
 @import './components/task';
 @import './components/appointment';
 @import './components/weather';
+@import './components/messages';
+@import './components/auth';
+@import './components/forms';
 
 // modifier class
 .text-green{
@@ -38,7 +41,11 @@
 }
 
 
-
+#root{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
 .App{
     position: relative;
     width: 100vw;
@@ -56,12 +63,17 @@
         display: block;
         overflow-x: hidden;
         overflow-y: scroll;
+
         &__main{
             position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+        }
+
+        .mobile-hidden{
+            display: none;
         }
     }
 }
