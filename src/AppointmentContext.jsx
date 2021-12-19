@@ -19,7 +19,7 @@ function AppointmentProvider({children}) {
     // Load tasks into memory
     const loadAppointments = () => {
         // fetch from server
-        // fetch('http://localhost:3002/appointments', {
+        // fetch('https://planout-server.herokuapp.com/appointments', {
         //     method: 'GET',
         //     headers: { 'Content-Type': 'application/json'},
         // }).then((response) => {return response.json()}).then(data => {
