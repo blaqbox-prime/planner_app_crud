@@ -2,17 +2,12 @@ import React, {useState} from 'react'
 import Arrow from '../svg/left-arrow.svg'
 import {Link} from 'react-router-dom';
 import IconTile from './IconTile'
-import AddIcon from '@mui/icons-material/Add';
-import SettingsIcon from '@mui/icons-material/Settings';
+
 
 
 function Channel({title}) {
 
     const [expanded, setExpanded] = useState(false)
-
-   const arrowDownStyle =  {
-    transform: 'RotateX(-90deg)'
-   }
 
    const togglePanel = () => {
        const newState = !expanded;

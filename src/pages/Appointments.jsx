@@ -1,7 +1,6 @@
 import React, {useRef, useEffect} from 'react'
 import AddButton from '../components/AddButton'
 import {useAppointment} from '../AppointmentContext'
-import List from '../components/List'
 import Appointment from '../components/Appointment'
 import AppointmentForm from './../components/AppointmentForm';
 import { useLayoutEffect } from 'react';

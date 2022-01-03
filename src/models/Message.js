@@ -1,5 +1,4 @@
 import { v4 } from "uuid";
-import { damien, kevin } from "./User";
 
 class Message {
   uid = v4();

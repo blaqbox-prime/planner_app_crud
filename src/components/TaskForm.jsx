@@ -3,18 +3,18 @@ import AccountTile from "./AccountTile";
 import {useTask} from '../TaskContext';
 import Task from '../models/Task';
 import {v4} from "uuid";
-import { kevin} from '../models/User';
 import {gsap} from 'gsap';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import {useAuth} from '../zustand/store'
 
 
 
 function TaskForm({currentTask}) {
+  const authUser = useAuth(state => state.loggedUser);
   const [title, setTitle] = useState("");
   const [deadline, setDeadline] = useState("");
   const {toggleTaskForm, setCurrentTask, loadTasks} = useTask();
-  const el = useRef();
   const tl = useRef();
 
   useEffect(()=>{
@@ -45,7 +45,7 @@ function TaskForm({currentTask}) {
        // create a task instance
        let newTask = new Task(
         v4(),
-        kevin,
+        authUser,
         new Date(),
         title,
         getCategoryFromSelect(),
@@ -151,7 +151,7 @@ function TaskForm({currentTask}) {
       <div className="form-group">
         <label for="creator">Creator</label>
         <div className="TaskForm__creator">
-          <AccountTile noIcon={true} user={currentTask && currentTask.author}/>
+          <AccountTile noIcon={true} user={currentTask ? currentTask.author : authUser}/>
         </div>
       </div>
       <button className="btn TaskForm__btn form-control" onClick={saveTask}>{currentTask ? 'Update Task' : 'Create Task'}</button>

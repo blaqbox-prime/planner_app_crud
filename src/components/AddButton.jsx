@@ -21,15 +21,16 @@ function AddButton({type}) {
             case 'task' : return setBtnText('Add Task');
             case 'appointment' :  return setBtnText('Add Appointment');
             case 'message' : return setBtnText('Send Message')
+            default: return;
         }
     }
 
     const _onClickBtnEvent = () => {
-        if(type == 'task')
+        if(type === 'task')
         {
             setCurrentTask(null); toggleTaskForm();
         }
-        else if (type == 'appointment')
+        else if (type === 'appointment')
         {
             setCurrentAppointment(null); toggleAppointmentForm();
         }

@@ -7,7 +7,6 @@ function SignUp() {
 
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
-    const [fullname, setFullname] = useState('')
     const [category, setCategory] = useState('Standard Account')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -61,7 +60,7 @@ function SignUp() {
                         })
         }).then(res => res.json()).then(data => {
             console.log(data);
-            if(data.error == "true"){
+            if(data.error === "true"){
                 setError(data);
             }else{
                 

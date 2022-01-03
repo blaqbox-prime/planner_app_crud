@@ -1,13 +1,14 @@
 import React from 'react'
 import Weather from './../components/Weather';
+import {useAuth} from '../zustand/store';
+
 
 
 function Dashboard() {
-
+  const authUser = useAuth(state => state.loggedUser);
     const _buildGreetingMessage = () => {
         const hour = new Date().getHours();
-        console.log(hour);
-        if(hour >= 12){
+        if(hour >= 12 && hour < 18){
           return "Good Afternoon"
         }
         else
@@ -22,7 +23,7 @@ function Dashboard() {
     return (
         <div className="Dashboard main-container">
         <div className="Dashboard__heading page_header">
-        <h1 className="Dashboard__title page_title">{_buildGreetingMessage()} <span className="text-green">Kevin</span></h1>
+        <h1 className="Dashboard__title page_title">{_buildGreetingMessage()} <span className="text-green">{authUser.firstName}</span></h1>
         </div>
         <Weather/>
     </div>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import {useTask} from '../TaskContext';
 import Task from './Task'
@@ -10,7 +10,7 @@ import AddButton from './AddButton';
 
 const TaskList = () => {
 
-    const {loadTasks, tasks, showForm, toggleTaskForm, currentTask, setCurrentTask,tasksInProgress} = useTask();
+    const {loadTasks, tasks, showForm,  currentTask ,tasksInProgress} = useTask();
     const tl = useRef()
 
     // Run once on mount
@@ -75,7 +75,7 @@ export const EmptyTaskList = () => {
 
     return (
         <div className="EmptyTaskList">
-            <img src="images/todos-empty.png" alt="empty list" />
+            <img src="/images/todos-empty.png" alt="empty list" />
             <h1>Looks like you have nothing to do...</h1>
         </div>
     )

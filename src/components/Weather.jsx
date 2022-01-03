@@ -3,7 +3,7 @@ import React, { useState, useEffect, useLayoutEffect } from "react";
 function Weather() {
   const [weather, setWeather] = useState(null);
   const [time, setTime] = useState("00:00");
-  const [usersCity, setUsersCity] = useState("Polokwane");
+  // const [usersCity, setUsersCity] = useState("Polokwane");
 
   useEffect(() => {
       getWeatherReport();
@@ -49,7 +49,7 @@ function Weather() {
     else {
         console.log('report needs update. Now fetching from api')
         fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${usersCity}&appid=${WEATHER_API_KEY}`
+            `https://api.openweathermap.org/data/2.5/weather?q=Polokwane&appid=${WEATHER_API_KEY}`
           )
             .then((response) => {
               return response.json();
@@ -82,7 +82,7 @@ function Weather() {
   return (
     <div className="Weather">
       <div className="Weather__header">
-          <div className="weather__city">{usersCity}</div>
+          <div className="weather__city">Polokwane</div>
           <div className="weather__time">{time}</div>
       </div>
       {/* ===================================== */}

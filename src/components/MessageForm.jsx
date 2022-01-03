@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import {damien, victor, richard, kevin} from '../models/User';
 import {gsap} from 'gsap';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useMessage } from './../zustand/store';
-import AccountTile from './AccountTile';
 import Message from '../models/Message';
 import { v4 } from "uuid";
 
@@ -17,7 +16,6 @@ function MessageForm() {
   const addMessage = useMessage(state => state.addMessage)
   const messages = useMessage(state => state.messages)
 
-  const el = useRef();
   const tl = useRef();
 
 
@@ -69,7 +67,7 @@ function MessageForm() {
 
   function _buildRecipientList(){
     return (accounts.map((acc,idx) => {
-      if(idx == 0) return <option value={acc.id} selected> {acc.getFullName()} </option>
+      if(idx === 0) return <option value={acc.id} selected> {acc.getFullName()} </option>
       else
       return <option value={acc.id}> {acc.getFullName()} </option>
     }));

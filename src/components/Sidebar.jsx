@@ -7,9 +7,10 @@ import Channel from './Channel';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-
+import {useAuth} from '../zustand/store';
 
 function Sidebar({closed}) {
+    const authUser = useAuth(state => state.loggedUser);
     return (
         <div className={`Sidebar ${closed && 'Sidebar__closed'}`}>
            <div className="Sidebar__header">
@@ -18,7 +19,7 @@ function Sidebar({closed}) {
                 <CloseIcon />
             </IconButton>
            </div>
-            <AccountTile/>
+            <AccountTile user={authUser}/>
 
             <IconTile icon={InboxIcon} title='Inbox'/>
             <IconTile icon={CalendarIcon} title='Today'/>

@@ -47,11 +47,12 @@ function SignIn() {
             body: JSON.stringify({email: email, password: password,})
         }).then(res => res.json()).then(data => {
             console.log(data.user);
-            if(data.error == "true"){
+            if(data.error === "true"){
                 setError(data);
             }else{
                 const user = new User(data.user.id,data.user.email,data.user.first_name,data.user.last_name,data.user.account_type);
                 loginUser(user);
+                localStorage.setItem('logged_user', JSON.stringify(user));
                 setEmail('');
                 setPassword('');
                 setTimeout(() => {

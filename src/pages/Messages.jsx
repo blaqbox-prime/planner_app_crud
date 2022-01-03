@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {io} from "socket.io-client";
+import React from 'react'
+// import {io} from "socket.io-client";
 import AddButton from './../components/AddButton';
 import {useMessage} from '../zustand/store';
 import MessageForm from './../components/MessageForm';
@@ -8,8 +8,7 @@ import Message from '../components/Message';
 
 function Messages() {
 
-    const [messageText, setMessageText] = useState('');
-    const [socket, setSocket] = useState();
+    // const [socket, setSocket] = useState();
     const showForm = useMessage(state => state.showForm)
     const messages = useMessage(state => state.messages)
     
@@ -17,13 +16,13 @@ function Messages() {
 
 
     // connect to socket server
-    useEffect(() => {
-        const s = io('http://localhost:3005');
-        setSocket(s);
-        return () => {
-            s.disconnect();
-        }
-    }, [])
+    // useEffect(() => {
+    //     const s = io('http://localhost:3005');
+    //     setSocket(s);
+    //     return () => {
+    //         s.disconnect();
+    //     }
+    // }, [])
 
 
 
