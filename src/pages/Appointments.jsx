@@ -4,16 +4,18 @@ import {useAppointment} from '../AppointmentContext'
 import Appointment from '../components/Appointment'
 import AppointmentForm from './../components/AppointmentForm';
 import { useLayoutEffect } from 'react';
+import {useAuth} from '../zustand/store'
 import gsap from 'gsap'
 
 function Appointments() {
 
     const {loadAppointments, appointments, showForm, currentAppointment} = useAppointment();
+    const authUser = useAuth(state => state.loggedUser);
     const tl = useRef();
 
         // Run once on mount
         useEffect(()=>{
-            loadAppointments();
+            loadAppointments(authUser);
         },[])
         
         

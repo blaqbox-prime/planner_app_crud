@@ -7,15 +7,19 @@ import {gsap} from 'gsap';
 import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import AddButton from './AddButton';
+import {useAuth} from '../zustand/store';
+
 
 const TaskList = () => {
 
     const {loadTasks, tasks, showForm,  currentTask ,tasksInProgress} = useTask();
     const tl = useRef()
+    const authUser = useAuth(state => state.loggedUser);
 
     // Run once on mount
     useEffect(()=>{
-        loadTasks();
+        // Load task of the passed in user
+        loadTasks(authUser);
     },[])
     
     // re-render on tasks update

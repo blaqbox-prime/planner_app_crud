@@ -17,18 +17,19 @@ function AppointmentProvider({children}) {
     const [currentAppointment, setCurrentAppointment] = useState()
 
     // Load tasks into memory
-    const loadAppointments = () => {
+    const loadAppointments = (authUser) => {
         // fetch from server
         fetch('http://localhost:3002/appointments', {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({userId: authUser.id})
         }).then((response) => {return response.json()}).then(data => {
-            let serverAppointments = data.map((ap) => {
+            let serverAppointments = data.map((appointment) => {
                 return new Appointment(
-                    ap.id,
-                    sampleAppointments[0].author,
-                    ap.title,
-                    new Date(ap.date),
+                    appointment.id,
+                    authUser,
+                    appointment.title,
+                    new Date(appointment.date),
                 );
             })
             setAppointments(serverAppointments);

@@ -84,6 +84,7 @@ function TaskForm({currentTask}) {
   }
 
   const saveTask = (e) => {
+    e.preventDefault();
     if(title === '') return;
 
     if(currentTask){
@@ -94,7 +95,7 @@ function TaskForm({currentTask}) {
       createTask()
     }
 
-    loadTasks();
+    loadTasks(authUser);
     setCurrentTask(null);
     setTitle(''); //reset task field
   }

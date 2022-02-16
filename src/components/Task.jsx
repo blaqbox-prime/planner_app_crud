@@ -4,11 +4,13 @@ import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import {useTask} from '../TaskContext';
+import {useAuth} from '../zustand/store';
 
 function Task({id,title, author, date, category, status}) {
 
     const [currentStatus, setCurrentStatus] = useState('incomplete');
     const {tasks, setCurrentTask, toggleTaskForm, showForm, loadTasks,setTasksInProgress, tasksInProgress} = useTask();
+    const authUser = useAuth(state => state.loggedUser);
 
     useEffect(()=>{
         setCurrentStatus(status);
@@ -48,7 +50,7 @@ function Task({id,title, author, date, category, status}) {
         const task = tasks.find(t => t.id === id);
         task.delete();
         // Fetch new set of tasks after deleting from database; 
-        setTimeout(() => {loadTasks()}, 500);
+        setTimeout(() => {loadTasks(authUser)}, 500);
     }
 
     return (

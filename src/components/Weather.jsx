@@ -2,16 +2,11 @@ import React, { useState, useEffect, useLayoutEffect } from "react";
 
 function Weather() {
   const [weather, setWeather] = useState(null);
-  const [time, setTime] = useState("00:00");
   // const [usersCity, setUsersCity] = useState("Polokwane");
 
   useEffect(() => {
       getWeatherReport();
-    }, [])
-
-    useEffect(() => {
-      getTime();
-    },[time])
+    },[]);
   
   const WEATHER_API_KEY = "1fe4edb33ff2e81398999828f50768fc";
 
@@ -32,10 +27,10 @@ function Weather() {
 
   const getWeatherReport = () => {
 
-    const weatherReport = localStorage.getItem("weather_report");
+    const weatherReport = sessionStorage.getItem("weather_report");
     const needsUpdate = () => {
       const currentTime = new Date();
-      const lastUpdate = new Date(JSON.parse(localStorage.getItem("last_upate")));
+      const lastUpdate = new Date(JSON.parse(sessionStorage.getItem("last_upate")));
 
       if (currentTime.getTime() - lastUpdate.getTime() > 10800000){
         return true;
@@ -71,19 +66,11 @@ function Weather() {
       return Math.floor(temperature - 273.15);
   }
 
-  const getTime = () => {
-    setInterval(() => {
-      const hours = new Date().getHours();
-      const minutes = new Date().getMinutes();
-      setTime(`${hours > 9 ? hours : `0${hours}`} : ${minutes > 9 ? minutes : `0${minutes}`}`);
-    },1000);
-  }
-
   return (
     <div className="Weather">
       <div className="Weather__header">
           <div className="weather__city">Polokwane</div>
-          <div className="weather__time">{time}</div>
+          <Time/>
       </div>
       {/* ===================================== */}
       <div className="Weather__forecast">
@@ -106,3 +93,21 @@ function Weather() {
 }
 
 export default Weather;
+
+function Time(){
+  const [time, setTime] = useState("00:00");
+  useEffect(() => {
+    getTime();
+  }, []);
+  
+
+  const getTime = () => {
+    setInterval(() => {
+      const hours = new Date().getHours();
+      const minutes = new Date().getMinutes();
+      setTime(`${hours > 9 ? hours : `0${hours}`} : ${minutes > 9 ? minutes : `0${minutes}`}`);
+    },1000);
+  }
+
+  return(<div className="weather__time">{time}</div>);
+}

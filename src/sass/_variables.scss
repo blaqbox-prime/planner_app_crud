@@ -36,3 +36,7 @@ $dark-green: #09827D;
     margin-bottom: 3rem;
     display: flex;
 }
+
+@mixin box-shadow{
+    box-shadow: 0px 0px 7px 5px $bg-blue;
+}

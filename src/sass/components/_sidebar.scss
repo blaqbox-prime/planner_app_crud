@@ -56,12 +56,17 @@
 
     
     @include mobile-device{ // mobile specific styles
-        padding: 2em;
+        padding: unset;
         z-index: 5;
-        position: relative;
-        width: 100vw;
-        min-width: 100vw;
-        height: 100vh;
+        position: fixed;
+        overflow: hidden;
+        width: 0;
+        top: 0;
+        left: 0;
+        max-width: 100vw;
+        height: 100%;
+        transition: .5s;
+        max-width: unset;
 
         #Sidebar__closeIcon{
             display: block;

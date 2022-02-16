@@ -7,6 +7,7 @@ import { kevin} from '../models/User';
 import {gsap} from 'gsap';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import {useAuth} from '../zustand/store';
 
 function AppointmentForm({currentAppointment}) {
 
@@ -14,6 +15,7 @@ function AppointmentForm({currentAppointment}) {
   const [day, setday] = useState("");
   const {toggleAppointmentForm, setCurrentAppointment, loadAppointments} = useAppointment();
   const tl = useRef();
+  const authUser = useAuth(state => state.loggedUser);
 
   useEffect(()=>{
     if(currentAppointment){
@@ -70,6 +72,7 @@ function AppointmentForm({currentAppointment}) {
   }
 
   const saveAppointment = (e) => {
+    e.preventDefault();
     if(title === '') return;
 
     if(currentAppointment){
@@ -114,7 +117,7 @@ function AppointmentForm({currentAppointment}) {
       <div className="form-group">
         <label for="creator">Creator</label>
         <div className="TaskForm__creator">
-          <AccountTile noIcon={true} user={currentAppointment && currentAppointment.author}/>
+          <AccountTile noIcon={true} user={currentAppointment ? currentAppointment.author : authUser}/>
         </div>
       </div>
       <button className="btn TaskForm__btn form-control" onClick={saveAppointment}>{currentAppointment ? 'Update Appointment' : 'Create Appointment'}</button>

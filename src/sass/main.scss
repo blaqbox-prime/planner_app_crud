@@ -58,7 +58,6 @@
     }
 
 
-
     @include mobile-device{
         display: block;
         overflow-x: hidden;
@@ -76,4 +75,14 @@
             display: none;
         }
     }
+}
+
+#menu-icon{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 2.1em;
+    right: 2rem;
+    font-size: 2rem;
+    cursor: pointer;
 }

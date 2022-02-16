@@ -8,6 +8,7 @@ import IconTile from './IconTile'
 function Channel({title}) {
 
     const [expanded, setExpanded] = useState(false)
+    const [activeTabIndex, setActiveTabIndex] = useState(0)
 
    const togglePanel = () => {
        const newState = !expanded;
@@ -22,6 +23,18 @@ function Channel({title}) {
 
    }
 
+   function _buildChannelNav(){
+       const channel_tabs = ['dashboard', 'tasks', 'messages', 'appointments']
+       return (channel_tabs.map((tab,idx) =>
+        activeTabIndex === idx ? 
+         (<li> <Link to={tab} className='active'>{tab}</Link> </li>)
+        :
+        ( <li>
+            <Link to={tab}>{tab}</Link>
+        </li>)
+       ));
+   } 
+
     return (
         <div className="Channel">
             <div className="Channel__header" onClick={() => togglePanel()}>
@@ -29,18 +42,7 @@ function Channel({title}) {
                 <img src={Arrow} alt="" className={`Channel__expand ${!expanded && 'Channel__expand_closed'}`}/>
             </div>
             <ul className={`Channel__links ${!expanded && 'Channel__links_closed'}`}>
-                <li>
-                    <Link to='dashboard'>Dashboard</Link>
-                </li>
-                <li>
-                    <Link to='tasks' className="active">Tasks</Link>
-                </li>
-                <li>
-                    <Link to='messages'>Messages</Link>
-                </li>
-                <li>
-                    <Link to='appointments'>Appointments</Link>
-                </li>
+                {_buildChannelNav()}
                 <li>
                     <Link to='settings' className="no-highlight">
                         <IconTile title='settings'/>

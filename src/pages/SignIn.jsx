@@ -17,6 +17,7 @@ function SignIn() {
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
+    // Animation
     useLayoutEffect(() => {
         tl.current = gsap.timeline()
         .from(".form",{y: -50, opacity: 0, duration: 1.5 ,ease: 'Power2.easeInOut'});
@@ -32,7 +33,7 @@ function SignIn() {
     }
 
     const closeAlert = (e) => {
-        setError(undefined);
+        setError(null);
     }
     
     const login = (e) => {
@@ -52,14 +53,10 @@ function SignIn() {
             }else{
                 const user = new User(data.user.id,data.user.email,data.user.first_name,data.user.last_name,data.user.account_type);
                 loginUser(user);
-                localStorage.setItem('logged_user', JSON.stringify(user));
+                sessionStorage.setItem('logged_user', JSON.stringify(user));
                 setEmail('');
                 setPassword('');
-                setTimeout(() => {
-                    console.log(loggedUser);
-                    // log in to app
-                    history.replace(from);
-                }, 1000);
+                history.replace(from);
             }
         }).catch(err => {
             console.log(err);
