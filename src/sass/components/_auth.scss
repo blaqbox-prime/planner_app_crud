@@ -1,8 +1,8 @@
 .SignIn{
     width: 100%;
     height: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
 
     h1{
         text-align: center;
@@ -11,17 +11,16 @@
     }
 
     &__bg{
-        position: absolute;
-        width: 100vw;
+        position: block;
+        width: 100%;
         height: 100vh;
         overflow: hidden;
-        background-image: url('http://localhost:3000/images/signin-bg.jpg');
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        z-index: -5;
-        filter: blur(5px);
-        opacity: 0.5;
+        object-position: center;
+        object-fit: cover;
+        // object-repeat: no-repeat;
+        // z-index: -5;
+        // filter: blur(5px);
+        // opacity: ;
     }
 
 }

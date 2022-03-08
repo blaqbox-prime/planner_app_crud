@@ -17,7 +17,7 @@ function TaskProvider({ children }) {
   // Load tasks into memory
   const loadTasks = (authUser) => {
     // fetch from server
-    fetch("http://127.0.0.1:3002/tasks", {
+    fetch("https://planout-server.herokuapp.com/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({userid: authUser.id})

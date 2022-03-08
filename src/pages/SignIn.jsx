@@ -40,7 +40,7 @@ function SignIn() {
         e.preventDefault();
         console.log({email: email, password: password});
         if(email !== '' && password !== '') {
-            fetch('http://localhost:3002/auth/signin', {
+            fetch('https://planout-server.herokuapp.com/auth/signin', {
             method: 'POST',
             headers : {
                 'Content-Type': 'application/json'
@@ -67,8 +67,8 @@ function SignIn() {
 
     return (
         <div className="SignIn">
-            <div className="SignIn__bg"></div>
-            <form className="form" style={{width: '400px'}}>
+            <img src="/images/signin-bg.jpg" className="SignIn__bg"></img>
+            <form className="form" style={{width: '400px', margin:"0 5rem"}}>
             <h1 className="">Plan <span className="text-green">Out</span></h1>
             {error && <div className="alert-error">{error && error.message} <span className="alert-close" onClick={closeAlert}>x</span> </div>}
                 <div className="form-group">

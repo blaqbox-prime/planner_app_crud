@@ -37,7 +37,7 @@ class Message {
   }
 
   send() {
-    fetch("http://127.0.0.1:3002/message/create", {
+    fetch("https://planout-server.herokuapp.com/message/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -54,7 +54,7 @@ class Message {
 
 
   delete() {
-    fetch(`http://127.0.0.1:3002/message/delete/${this.uid}`, {
+    fetch(`https://planout-server.herokuapp.com/message/delete/${this.uid}`, {
       method: "DELETE",
     })
       .then((data) => {

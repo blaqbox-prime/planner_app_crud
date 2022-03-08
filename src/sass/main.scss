@@ -20,6 +20,11 @@
     @include page-header-spacing;
 }
 
+.page_title{
+    @include mobile-device{
+        width: 70vw;
+        }
+}
 
 .main-container{
     flex: 1;
@@ -77,6 +82,12 @@
     }
 }
 
+//
+
+.MainApp{
+    position: relative;
+}
+
 #menu-icon{
     margin: 0;
     padding: 0;
@@ -85,4 +96,12 @@
     right: 2rem;
     font-size: 2rem;
     cursor: pointer;
+    z-index: 999;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.menu-icon__hidden{
+    display: none;
 }

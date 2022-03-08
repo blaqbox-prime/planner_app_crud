@@ -47,7 +47,7 @@ class Task {
   }
 
   create() {
-    fetch("http://127.0.0.1:3002/task/create", {
+    fetch("https://planout-server.herokuapp.com/task/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -65,7 +65,7 @@ class Task {
   }
 
   update() {
-    fetch("http://127.0.0.1:3002/task/update", {
+    fetch("https://planout-server.herokuapp.com/task/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -82,7 +82,7 @@ class Task {
   }
 
   updateStatus(status) {
-    fetch(`http://127.0.0.1:3002/task/update-status/${this.id}`, {
+    fetch(`https://planout-server.herokuapp.com/task/update-status/${this.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -96,7 +96,7 @@ class Task {
   }
 
   delete() {
-    fetch(`http://127.0.0.1:3002/task/delete/${this.id}`, {
+    fetch(`https://planout-server.herokuapp.com/task/delete/${this.id}`, {
       method: "DELETE",
     })
       .then((data) => {

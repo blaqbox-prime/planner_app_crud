@@ -83,7 +83,7 @@ function AppointmentForm({currentAppointment}) {
       createAppointment()
     }
 
-    loadAppointments();
+    loadAppointments(authUser);
     setCurrentAppointment(null);
     setTitle(''); //reset Appointment field
   }

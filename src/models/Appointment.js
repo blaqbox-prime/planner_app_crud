@@ -36,7 +36,7 @@ class Appointment {
   }
 
   create() {
-    fetch("http://127.0.0.1:3002/appointment/create", {
+    fetch("https://planout-server.herokuapp.com/appointment/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -51,7 +51,7 @@ class Appointment {
   }
 
   update() {
-    fetch("http://127.0.0.1:3002/appointment/update", {
+    fetch("https://planout-server.herokuapp.com/appointment/update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -68,7 +68,7 @@ class Appointment {
 
 
   delete() {
-    fetch(`http://127.0.0.1:3002/appointment/delete/${this.id}`, {
+    fetch(`https://planout-server.herokuapp.com/appointment/delete/${this.id}`, {
       method: "DELETE",
     })
       .then((data) => {

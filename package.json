@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "firebase": "^9.1.2",
+    "firebase": "^9.6.6",
     "gsap": "^3.8.0",
     "mysql": "^2.18.1",
     "node-sass": "^6.0.1",

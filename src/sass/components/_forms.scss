@@ -33,7 +33,15 @@ form{
     input[type="text"],
     input[type="email"],
     input[type="password"]{
-        background-color: transparent;
+    background-color: transparent;
+
+    // mobile
+    @include mobile-device{
+        margin: 0 auto;
+        display: block;
+        z-index: 99;
+    }
+
     }
 
     .form-btn{
