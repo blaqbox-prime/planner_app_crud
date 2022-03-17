@@ -42,7 +42,9 @@ function SignIn() {
         if(email !== '' && password !== '') {
             fetch('https://planout-server.herokuapp.com/auth/signin', {
             method: 'POST',
+            mode: 'no-cors',
             headers : {
+                
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({email: email, password: password,})

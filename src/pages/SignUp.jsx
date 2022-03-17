@@ -45,7 +45,7 @@ function SignUp() {
 
         e.preventDefault();
         if(noEmptyFields() && PasswordsMatch() ){
-            fetch('http://localhost:3002/auth/signup', {
+            fetch('https://planout-server.herokuapp.com/auth/signup', {
             method: 'POST',
             headers : {
                 'Content-Type': 'application/json'
