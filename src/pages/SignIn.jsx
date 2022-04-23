@@ -4,15 +4,12 @@ import {useAuth} from '../zustand/store';
 import { useHistory, useLocation } from 'react-router';
 import User from '../models/User';
 
-
-
 function SignIn() {
     const tl = useRef();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const loginUser = useAuth(state => state.loginUser);
-    const loggedUser = useAuth(state => state.loggedUser);
+    const {authUser, loginUser} = useAuth();
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
@@ -40,22 +37,21 @@ function SignIn() {
         e.preventDefault();
         console.log({email: email, password: password});
         if(email !== '' && password !== '') {
-            fetch('https://planout-server.herokuapp.com/auth/signin', {
+            fetch(`https://planout-server.herokuapp.com/auth/signin`, {
             method: 'POST',
-            mode: 'no-cors',
             headers : {
                 
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({email: email, password: password,})
-        }).then(res => res.json()).then(data => {
-            console.log(data.user);
-            if(data.error === "true"){
-                setError(data);
+        }).then(res => res.json()).then(user => {
+            console.log(user);
+            if(user.error === "true"){
+                setError(user);
             }else{
-                const user = new User(data.user.id,data.user.email,data.user.first_name,data.user.last_name,data.user.account_type);
-                loginUser(user);
-                sessionStorage.setItem('logged_user', JSON.stringify(user));
+                const newUser = new User(user._id,user.email,user.firstName,user.lastName,user.accountType);
+                loginUser(newUser);
+                sessionStorage.setItem('logged_user', JSON.stringify(authUser));
                 setEmail('');
                 setPassword('');
                 history.replace(from);

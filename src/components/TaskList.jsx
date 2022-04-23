@@ -1,24 +1,24 @@
 import React, {useEffect} from 'react'
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-import {useTask} from '../TaskContext';
+import {useTask} from '../contexts/TaskContext';
 import Task from './Task'
 import TaskForm from './TaskForm';
 import {gsap} from 'gsap';
 import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import AddButton from './AddButton';
-import {useAuth} from '../zustand/store';
+import {useAuth} from '../contexts/authContext';
 
 
 const TaskList = () => {
 
     const {loadTasks, tasks, showForm,  currentTask ,tasksInProgress} = useTask();
-    const tl = useRef()
-    const authUser = useAuth(state => state.loggedUser);
+    const {authUser} = useAuth();
+    const tl = useRef();
 
     // Run once on mount
     useEffect(()=>{
-        // Load task of the passed in user
+        console.log(authUser);
         loadTasks(authUser);
     },[])
     

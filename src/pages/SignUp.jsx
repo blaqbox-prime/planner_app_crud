@@ -51,7 +51,6 @@ function SignUp() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: guid(),
                 firstName: firstname.trim(),
                 lastName: lastname.trim(),
                 accountType: category.trim(),
@@ -144,7 +143,7 @@ function SignUp() {
     return (
         <div className="SignUp">
             <img src="./images/Time management.png" width="500px" alt="" className="SignUp__img mobile-hidden" />
-            <form action="" className="form">
+            <form action="" className="form" id="signUpForm">
                 <h1 className="SignUp__title">Sign <span className="text-green">Up</span></h1>
                 {error && <div className="alert-error">{error && error.message} <span className="alert-close" onClick={closeAlert}>x</span> </div>}
                 <div className="form-group">

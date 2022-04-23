@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {useTask} from '../TaskContext';
-import {useAppointment} from '../AppointmentContext';
-import {useMessage} from '../zustand/store';
+import {useTask} from '../contexts/TaskContext';
+import {useAppointment} from '../contexts/AppointmentContext';
 
 
 function AddButton({type}) {
@@ -9,7 +8,6 @@ function AddButton({type}) {
     const {toggleTaskForm, setCurrentTask} = useTask();
     const {toggleAppointmentForm, setCurrentAppointment} = useAppointment();
     const [btnText, setBtnText] = useState('');
-    const toggleForm = useMessage(state => state.toggleForm)
     
     // set btn text on create
     useEffect(() => {
@@ -20,7 +18,6 @@ function AddButton({type}) {
         switch (type) {
             case 'task' : return setBtnText('Add Task');
             case 'appointment' :  return setBtnText('Add Appointment');
-            case 'message' : return setBtnText('Send Message')
             default: return;
         }
     }
@@ -33,9 +30,6 @@ function AddButton({type}) {
         else if (type === 'appointment')
         {
             setCurrentAppointment(null); toggleAppointmentForm();
-        }
-        else{
-            toggleForm();
         }
     }
 

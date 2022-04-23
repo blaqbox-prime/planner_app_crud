@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppointment} from '../AppointmentContext'
+import {useAppointment} from '../contexts/AppointmentContext'
 import { IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import EditIcon from '@mui/icons-material/Edit';

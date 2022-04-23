@@ -3,7 +3,7 @@ import TaskCategory from './TaskCategory';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import {useTask} from '../TaskContext';
+import {useTask} from '../contexts/TaskContext';
 import {useAuth} from '../zustand/store';
 
 function Task({id,title, author, date, category, status}) {

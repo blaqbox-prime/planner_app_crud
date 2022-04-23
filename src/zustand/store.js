@@ -1,4 +1,5 @@
 import create from 'zustand';
+import User from '../models/User';
 
 // Messages state =================================================================================================
 export const useMessage = create(

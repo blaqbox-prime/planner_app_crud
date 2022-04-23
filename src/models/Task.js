@@ -51,7 +51,6 @@ class Task {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: this.id,
         author: this.author.id,
         title: this.title,
         category: this.category,
